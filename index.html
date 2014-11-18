@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html ng-app="analytics-demo">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+  <title>Analytics Api POC</title>
+
+  <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body ng-controller="DemoCtrl">
+  <div class="container">
+    <div class="row">
+      <h3>GA Experiments API test</h3>
+      <button ng-click="getGAData()">Get Data!</button>
+
+
+      <br><br>
+
+      <table class="table table-striped" ng-show="experiments[0]">
+        <thead>
+          <tr>
+            <th>Account</th>
+            <th>Property</th>
+            <th>Profile</th>
+            <th>Name</th>
+            <th>Status</th>
+            <th>Variations</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="item in experiments">
+            <td>{{item.accountId}}</td>
+            <td>{{item.webPropertyId}}</td>
+            <td>{{item.profileId}}</td>
+            <td>{{item.name}}</td>
+            <td>{{item.status}}</td>
+            <td>
+              <span ng-repeat="vari in item.variations">
+                <a ng-href="{{vari.url}}" target="_blank">{{vari.name}}</a> ,
+              </span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <br><br>
+      <div ng-show="result">
+        <h5>Raw data</h5>
+        <span ng-bind-html="result|trustHtml"></span>
+      </div>
+    </div>
+  </div>
+
+  <script src="//code.jquery.com/jquery-1.11.1.js"></script>
+  <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.22/angular.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.22/angular-sanitize.js"></script>
+  <script src="//auth.newsfront.no/download/latest/oauth.js"></script>
+  <script src="./script.js"></script>
+</body>
+</html>
